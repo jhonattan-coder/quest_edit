@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Editor de preguntas</title>
+<script>
+function mostrarPaleta(){
+//alert('mensaje');
+  var x = document.getElementById("editordeecuaciones");
+  x.style.visibility = "visible";
+  var y = document.querySelectorAll("button");
+  for(i=2;i<50;i++){  
+  y[i].style.visibility = "visible";
+  }    
+}
+
+function ocultarPaleta(){
+//alert('mensaje');
+   
+  var y = document.querySelectorAll("button");
+  for(i=0;i<51;i++){  
+  y[i].style.visibility = "hidden";
+  }
+  var x = document.getElementById("editordeecuaciones");
+  x.style.visibility = "hidden";    
+}
+
+function cambiarPaleta(e){
+	x = document.querySelectorAll('button');
+	for(i=0;i<51;i++){
+	x[i].style.visibility="hidden";
+	}
+	
+	if(e.target.id==="operadores"){
+	x[0].style.visibility="visible";
+	}
+	if(e.target.id==="flechas"){
+	x[1].style.visibility="visible";
+	}
+	if(e.target.id==="simbolosgriegos"){
+		for(i=2;i<50;i++){
+	x[i].style.visibility="visible";
+		}
+	}
+	if(e.target.id==="avanzado"){
+	x[50].style.visibility="visible";
+	}
+	
+}
+function edit(e){
+	var area=document.getElementById("vistaprevia");
+	var text=document.getElementById("vistaprevia").textContent;
+	text += e.target.innerText;
+	area.textContent= text;
+	}
+	
+function ok(){
+	var text=document.getElementById("vistaprevia").textContent;
+	var main_text=document.getElementById("pregunta");
+	main_text.textContent += text;
+	}
+
+function hacerclic(){
+document.getElementsByTagName('input')[0].onclick=mostrarPaleta;
+document.getElementsByTagName('input')[5].onclick=ocultarPaleta;
+document.getElementsByTagName('input')[6].onclick=ocultarPaleta;
+document.getElementsByTagName('input')[7].onclick=ok;
+for(i=1;i<5;i++){
+document.getElementsByTagName('input')[i].onclick=cambiarPaleta;
+}
+
+for(i=0;i<51;i++){
+document.querySelectorAll('button')[i].onclick=edit;
+}
+}
+
+window.onload=hacerclic;
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+<style>
+
+div{
+	border:solid 1px rgb(102,102,102);
+	padding:5px;
+	margin-top:2px;
+	}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="Layaut" id="layaut">
+  
+  <div class="Herramientas" id="herramientas">
+    
+    <div class="btn01" id="btn01">
+    <input name="simbolos_matematicas" type="button" class="SimbolosMatematicas" id="SimbolosMatematicas" value="Edit" />
+    </div>
+    
+  </div>
+    
+  <div class="AreaDeTexto" id="areadetexto">
+  
+  <textarea name="preguntas" cols="100" rows="10" class="Pregunta" id="pregunta">Colocar aquí el contenido para  class "AreaDeTexto" id "areadetexto"</textarea>
+  
+  </div> 
+   
+</div>
+
+
+<div class="EditorDeEcuaciones" id="editordeecuaciones" style="visibility: hidden; margin-top:10px">
+  
+  <div class="Panel" id="panel" style="position: relative">
+  <input name="operadores" type="button" class="Operadores" id="operadores" value="Operadores" />
+  <input name="flechas" type="button" class="Flechas" id="flechas" value="Flechas" />
+  <input name="simbolosgriegos" type="button" class="SimbolosGriegos" id="simbolosgriegos" value="Sim Griegos" />
+  <input name="avanzado" type="button" class="Avanzado" id="avanzado" value="Avanzado" />
+  <input name="cerrar" type="button" class="Cerrar" id="cerrar" value="X" style="float:right"/>
+  </div>
+  
+  <div class="ListaDeBotones" id="listadebotones" style="position:relative; height:100px">
+  
+   <div class="Operadores" id="operadores" style="visibility:hidden; position: absolute; height:90px">
+   <button class="Mas" id="mas" value="+">+</button>
+    </div>
+
+   <div class="Flechas" id="flechas" style="visibility:hidden; position: absolute">
+   <button class="Adelante" id="adelante" value="-->">-></button>
+   </div>
+
+   <div class="SimbolosGriegos" id="simbolosgriegos" style="visibility:hidden; position: absolute; height:90px">
+   <button class="Alpha" id="alpha" value="Α">Αfgf</button>
+   <button class="Alpha" id="alpha" value="Β">Β</button>
+   <button class="Alpha" id="alpha" value="Γ">Γ</button>
+   <button class="Alpha" id="alpha" value="Δ">Δ</button>
+   <button class="Alpha" id="alpha" value="Ε">Ε</button>
+   <button class="Alpha" id="alpha" value="Ζ">Ζ</button>
+   <button class="Alpha" id="alpha" value="Η">Η</button>
+   <button class="Alpha" id="alpha" value="Θ">Θ</button>
+   <button class="Alpha" id="alpha" value="Ι">Ι</button>
+   <button class="Alpha" id="alpha" value="Κ">Κ</button>
+   <button class="Alpha" id="alpha" value="Λ">Λ</button>
+   <button class="Alpha" id="alpha" value="Μ">Μ</button><br />
+   <button class="Alpha" id="alpha" value="Ν">Ν</button>
+   <button class="Alpha" id="alpha" value="Ξ">Ξ</button>
+   <button class="Alpha" id="alpha" value="Ο">Ο</button>
+   <button class="Alpha" id="alpha" value="Π">Π</button>
+   <button class="Alpha" id="alpha" value="Ρ">Ρ</button>
+   <button class="Alpha" id="alpha" value="Σ">Σ</button>
+   <button class="Alpha" id="alpha" value="Τ">Τ</button>
+   <button class="Alpha" id="alpha" value="Υ">Υ</button>
+   <button class="Alpha" id="alpha" value="Φ">Φ</button>
+   <button class="Alpha" id="alpha" value="Χ">Χ</button>
+   <button class="Alpha" id="alpha" value="Ψ">Ψ</button>
+   <button class="Alpha" id="alpha" value="Ω">Ω</button><br />
+   <button class="Alpha" id="alpha" value="α">α</button>
+   <button class="Alpha" id="alpha" value="β">β</button>
+   <button class="Alpha" id="alpha" value="γ">γ</button>
+   <button class="Alpha" id="alpha" value="δ">δ</button>
+   <button class="Alpha" id="alpha" value="ε">ε</button>
+   <button class="Alpha" id="alpha" value="ζ">ζ</button>
+   <button class="Alpha" id="alpha" value="η">η</button>
+   <button class="Alpha" id="alpha" value="θ">θ</button>
+   <button class="Alpha" id="alpha" value="ι">ι</button>
+   <button class="Alpha" id="alpha" value="κ">κ</button>
+   <button class="Alpha" id="alpha" value="λ">λ</button>
+   <button class="Alpha" id="alpha" value="μ">μ</button><br />
+   <button class="Alpha" id="alpha" value="ν">ν</button>
+   <button class="Alpha" id="alpha" value="ξ">ξ</button>
+   <button class="Alpha" id="alpha" value="ο">ο</button>
+   <button class="Alpha" id="alpha" value="π">π</button>
+   <button class="Alpha" id="alpha" value="ρ">ρ</button>
+   <button class="Alpha" id="alpha" value="σ">σ</button>
+   <button class="Alpha" id="alpha" value="τ">τ</button>
+   <button class="Alpha" id="alpha" value="υ">υ</button>
+   <button class="Alpha" id="alpha" value="φ">φ</button>
+   <button class="Alpha" id="alpha" value="χ">χ</button>
+   <button class="Alpha" id="alpha" value="ψ">ψ</button>
+   <button class="Alpha" id="alpha" value="ω">ω</button></div>
+
+   <div class="Avanzado" id="avanzado" style="visibility: hidden; position: absolute">
+   <button class="Potencia" id="potencia" value="x^y">x^y</button>
+   </div>
+  
+  </div>
+  
+<div class="AreaDeEdicion" id="areadeedicion" style="margin-top:10px">
+  <textarea name="VistaPrevia" cols="100" rows="10" class="VistaPrevia" id="vistaprevia" readonly="readonly">Colocar aquí el contenido para  class "AreaDeEdicion" id "areadeedicion"</textarea>
+  <div class="" id="">
+  <input name="close" type="button" class="close" id="close" value="close" />
+  <input name="ok" type="button" class="ok" id="ok" value="ok" />
+  </div>
+</div>
+  
+</div>
+</body>
+</html>

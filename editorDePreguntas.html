@@ -3,6 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Editor de preguntas</title>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script> MathJax = {startup: {pageReady() {MathJax.startup.defaultPageReady()}}}</script>
+
 <script>
 function mostrarPaleta(){
 //alert('mensaje');
@@ -49,8 +54,9 @@ function cambiarPaleta(e){
 }
 function edit(e){
 	var area=document.getElementById("vistaprevia");
-	var text=document.getElementById("vistaprevia").textContent;
-	text += e.target.innerText;
+  var text=document.getElementById("vistaprevia").textContent;
+  text += e.target.closest("button").value;
+  document.activeElement.blur()
 	area.textContent= text;
 	}
 	
@@ -155,30 +161,30 @@ div{
    <button class="Alpha" id="alpha" value="Χ">Χ</button>
    <button class="Alpha" id="alpha" value="Ψ">Ψ</button>
    <button class="Alpha" id="alpha" value="Ω">Ω</button><br />
-   <button class="Alpha" id="alpha" value="α">α</button>
-   <button class="Alpha" id="alpha" value="β">β</button>
-   <button class="Alpha" id="alpha" value="γ">γ</button>
-   <button class="Alpha" id="alpha" value="δ">δ</button>
-   <button class="Alpha" id="alpha" value="ε">ε</button>
-   <button class="Alpha" id="alpha" value="ζ">ζ</button>
-   <button class="Alpha" id="alpha" value="η">η</button>
-   <button class="Alpha" id="alpha" value="θ">θ</button>
-   <button class="Alpha" id="alpha" value="ι">ι</button>
-   <button class="Alpha" id="alpha" value="κ">κ</button>
-   <button class="Alpha" id="alpha" value="λ">λ</button>
-   <button class="Alpha" id="alpha" value="μ">μ</button><br />
-   <button class="Alpha" id="alpha" value="ν">ν</button>
-   <button class="Alpha" id="alpha" value="ξ">ξ</button>
-   <button class="Alpha" id="alpha" value="ο">ο</button>
-   <button class="Alpha" id="alpha" value="π">π</button>
-   <button class="Alpha" id="alpha" value="ρ">ρ</button>
-   <button class="Alpha" id="alpha" value="σ">σ</button>
-   <button class="Alpha" id="alpha" value="τ">τ</button>
-   <button class="Alpha" id="alpha" value="υ">υ</button>
-   <button class="Alpha" id="alpha" value="φ">φ</button>
-   <button class="Alpha" id="alpha" value="χ">χ</button>
-   <button class="Alpha" id="alpha" value="ψ">ψ</button>
-   <button class="Alpha" id="alpha" value="ω">ω</button></div>
+   <button class="Alpha" id="alpha" value="\alpha">\(\alpha\)</button>
+   <button class="Alpha" id="alpha" value="\beta">\(\beta\)</button>
+   <button class="Alpha" id="alpha" value="\gamma">\(\gamma\)</button>
+   <button class="Alpha" id="alpha" value="\delta">\(\delta\)</button>
+   <button class="Alpha" id="alpha" value="\epsilon">\(\epsilon\)</button>
+   <button class="Alpha" id="alpha" value="\zeta">\(\zeta\)</button>
+   <button class="Alpha" id="alpha" value="\eta">\(\eta\)</button>
+   <button class="Alpha" id="alpha" value="\theta">\(\theta\)</button>
+   <button class="Alpha" id="alpha" value="\iota">\(\iota\)</button>
+   <button class="Alpha" id="alpha" value="\kappa">\(\kappa\)</button>
+   <button class="Alpha" id="alpha" value="\lambda">\(\lambda\)</button>
+   <button class="Alpha" id="alpha" value="\mu">\(\mu\)</button><br />
+   <button class="Alpha" id="alpha" value="\nu">\(\nu\)</button>
+   <button class="Alpha" id="alpha" value="\xi">\(\xi\)</button>
+   <button class="Alpha" id="alpha" value="\omicron">\(\omicron\)</button>
+   <button class="Alpha" id="alpha" value="\pi">\(\pi\)</button>
+   <button class="Alpha" id="alpha" value="\rho">\(\rho\)</button>
+   <button class="Alpha" id="alpha" value="\sigma">\(\sigma\)</button>
+   <button class="Alpha" id="alpha" value="\tau">\(\tau\)</button>
+   <button class="Alpha" id="alpha" value="\upsilon">\(\upsilon\)</button>
+   <button class="Alpha" id="alpha" value="\phi">\(\phi\)</button>
+   <button class="Alpha" id="alpha" value="\chi">\(\chi\)</button>
+   <button class="Alpha" id="alpha" value="\psi">\(\psi\)</button>
+   <button class="Alpha" id="alpha" value="\omega">\(\omega\)</button></div>
 
    <div class="Avanzado" id="avanzado" style="visibility: hidden; position: absolute">
    <button class="Potencia" id="potencia" value="x^y">x^y</button>
@@ -187,7 +193,7 @@ div{
   </div>
   
 <div class="AreaDeEdicion" id="areadeedicion" style="margin-top:10px">
-  <textarea name="VistaPrevia" cols="100" rows="10" class="VistaPrevia" id="vistaprevia" readonly="readonly">Colocar aquí el contenido para  class "AreaDeEdicion" id "areadeedicion"</textarea>
+  <textarea name="VistaPrevia" cols="100" rows="10" class="VistaPrevia" id="vistaprevia">Colocar aquí el contenido para  class "AreaDeEdicion" id "areadeedicion"</textarea>
   <div class="" id="">
   <input name="close" type="button" class="close" id="close" value="close" />
   <input name="ok" type="button" class="ok" id="ok" value="ok" />

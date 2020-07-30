@@ -8,6 +8,8 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script> MathJax = {startup: {pageReady() {MathJax.startup.defaultPageReady()}}}</script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
 function mostrarPaleta(){
 //alert('mensaje');
@@ -71,9 +73,12 @@ document.getElementsByTagName('input')[0].onclick=mostrarPaleta;
 document.getElementsByTagName('input')[5].onclick=ocultarPaleta;
 document.getElementsByTagName('input')[6].onclick=ocultarPaleta;
 document.getElementsByTagName('input')[7].onclick=ok;
-for(i=1;i<5;i++){
-document.getElementsByTagName('input')[i].onclick=cambiarPaleta;
-}
+// for(i=1;i<5;i++){
+//document.getElementsByTagName('input')[i].onclick=cambiarPaleta;
+//}
+
+$('.grupo1').on("click",cambiarPaleta);
+
 
 for(i=0;i<51;i++){
 document.querySelectorAll('button')[i].onclick=edit;
@@ -119,11 +124,11 @@ div{
 <div class="EditorDeEcuaciones" id="editordeecuaciones" style="visibility: hidden; margin-top:10px">
   
   <div class="Panel" id="panel" style="position: relative">
-  <input name="operadores" type="button" class="Operadores" id="operadores" value="Operadores" />
-  <input name="flechas" type="button" class="Flechas" id="flechas" value="Flechas" />
-  <input name="simbolosgriegos" type="button" class="SimbolosGriegos" id="simbolosgriegos" value="Sim Griegos" />
-  <input name="avanzado" type="button" class="Avanzado" id="avanzado" value="Avanzado" />
-  <input name="cerrar" type="button" class="Cerrar" id="cerrar" value="X" style="float:right"/>
+  <input name="operadores" type="button" class="Operadores grupo1" id="operadores" value="Operadores" />
+  <input name="flechas" type="button" class="Flechas grupo1" id="flechas" value="Flechas" />
+  <input name="simbolosgriegos" type="button" class="SimbolosGriegos grupo1" id="simbolosgriegos" value="Sim Griegos" />
+  <input name="avanzado" type="button" class="Avanzado grupo1" id="avanzado" value="Avanzado" />
+  <input name="cerrar" type="button" class="Cerrar grupo1" id="cerrar" value="X" style="float:right"/>
   </div>
   
   <div class="ListaDeBotones" id="listadebotones" style="position:relative; height:100px">
@@ -161,7 +166,7 @@ div{
    <button class="Alpha" id="alpha" value="Χ">Χ</button>
    <button class="Alpha" id="alpha" value="Ψ">Ψ</button>
    <button class="Alpha" id="alpha" value="Ω">Ω</button><br />
-   <button class="Alpha" id="alpha" value="\alpha">\(\alpha\)</button>
+   <button class="Alpha" id="alpha" value="\(\alpha\)">\(\alpha\)</button>
    <button class="Alpha" id="alpha" value="\beta">\(\beta\)</button>
    <button class="Alpha" id="alpha" value="\gamma">\(\gamma\)</button>
    <button class="Alpha" id="alpha" value="\delta">\(\delta\)</button>

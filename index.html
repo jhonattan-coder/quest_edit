@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Editor de preguntas</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script> MathJax = {startup: {pageReady() {MathJax.startup.defaultPageReady()}}}</script>
@@ -11,46 +11,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+
 function mostrarPaleta(){
-//alert('mensaje');
   var x = document.getElementById("editordeecuaciones");
-  x.style.visibility = "visible";
-  var y = document.querySelectorAll("button");
-  for(i=2;i<50;i++){  
-  y[i].style.visibility = "visible";
-  }    
+  x.style.display = "block";
+  hacerclic();
 }
 
-function ocultarPaleta(){
-//alert('mensaje');
-   
-  var y = document.querySelectorAll("button");
-  for(i=0;i<51;i++){  
-  y[i].style.visibility = "hidden";
-  }
+function ocultarPaleta(){	      
+  var area=document.getElementById("vistaprevia");
+  area.textContent="";
   var x = document.getElementById("editordeecuaciones");
-  x.style.visibility = "hidden";    
+  x.style.display = "none";
 }
 
 function cambiarPaleta(e){
-	x = document.querySelectorAll('button');
-	for(i=0;i<51;i++){
-	x[i].style.visibility="hidden";
-	}
+	var grupo1 = document.getElementById("grupo1");
+	grupo1.style.visibility = "hidden";
+	var grupo2 = document.getElementById("grupo2");
+	grupo2.style.visibility = "hidden";
+	var grupo3 = document.getElementById("grupo3");
+	grupo3.style.visibility = "hidden";
+	var grupo4 = document.getElementById("grupo4");
+	grupo4.style.visibility = "hidden";
 	
 	if(e.target.id==="operadores"){
-	x[0].style.visibility="visible";
+		grupo1.style.visibility = "visible";
+	//var btn = document.createElement("button");
+	//grupo1.appendChild(btn);
 	}
-	if(e.target.id==="flechas"){
-	x[1].style.visibility="visible";
+	if(e.target.id==="logicayconjuntos"){
+		grupo2.style.visibility = "visible";
 	}
 	if(e.target.id==="simbolosgriegos"){
-		for(i=2;i<50;i++){
-	x[i].style.visibility="visible";
-		}
+		grupo3.style.visibility = "visible";
 	}
 	if(e.target.id==="avanzado"){
-	x[50].style.visibility="visible";
+	grupo4.style.visibility = "visible";
 	}
 	
 }
@@ -68,26 +65,31 @@ function ok(){
 	main_text.textContent += text;
 	}
 
+window.onclick = function(event) {
+  if (event.target.id == "SimbolosMatematicas") {
+	mostrarPaleta();
+  }
+  else if (event.target.id == "cerrar" || event.target.id == "close"){
+	ocultarPaleta();
+	  }
+	else if(event.target.id == "operadores" || event.target.id == "logicayconjuntos" || event.target.id == "simbolosgriegos" || event.target.id == "avanzado"){
+     cambiarPaleta(event); 
+		}
+		else if (event.target.id == "ok"){
+	     ok();
+	  }
+}
+
 function hacerclic(){
-document.getElementsByTagName('input')[0].onclick=mostrarPaleta;
-document.getElementsByTagName('input')[5].onclick=ocultarPaleta;
-document.getElementsByTagName('input')[6].onclick=ocultarPaleta;
-document.getElementsByTagName('input')[7].onclick=ok;
-// for(i=1;i<5;i++){
-//document.getElementsByTagName('input')[i].onclick=cambiarPaleta;
-//}
-
-$('.grupo1').on("click",cambiarPaleta);
-
-
-for(i=0;i<51;i++){
+for(i=0;i<184;i++){
 document.querySelectorAll('button')[i].onclick=edit;
 }
 }
 
-window.onload=hacerclic;
+//window.onload = hacerclic;
+
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
 <style>
 
 div{
@@ -95,110 +97,287 @@ div{
 	padding:5px;
 	margin-top:2px;
 	}
-
+#enunciadopregunta, #editordeecuaciones{
+	width:50%;
+	}
+#pregunta{
+	width:50%; 
+	height:100px; 
+	border: solid 1px #000000;
+	}
+#editordeecuaciones{
+	position: relative; 
+	display:none; 
+	margin-top:10px;
+	z-index:9;
+	}
+#editordeecuacionesheader{
+	position: relative; 
+	height: 20px; 
+	cursor: move;
+	z-index:10;
+}
+#cerrar{
+	float:right;
+	}
+#contenedor{
+	position:relative; 
+	height:100px;
+	}
+#grupo1, #grupo2, #grupo4{
+	 visibility: hidden; 
+	 position:absolute; 
+	 height:90px;
+	}
+#grupo3{
+	visibility: visible; 
+	 position:absolute; 
+	 height:90px;
+	}
+	
+#vistaprevia{
+	width:50%; 
+	height:100px; 
+	border: solid 1px #000000;
+}
+#vistaprevia2{
+	width:50%; 
+	height:30px; 
+	border: solid 1px #000000;
+}
 </style>
 
 </head>
 
 <body>
 
-<div class="Layaut" id="layaut">
+<div class="EnunciadoPregunta" id="enunciadopregunta">
   
-  <div class="Herramientas" id="herramientas">
+  <div class="" id="">
     
-    <div class="btn01" id="btn01">
-    <input name="simbolos_matematicas" type="button" class="SimbolosMatematicas" id="SimbolosMatematicas" value="Edit" />
+    <div class="" id="">
+    <input name="simbolos_matematicas" type="button" class="SimbolosMatematicas" id="SimbolosMatematicas" value="Math" />
     </div>
     
   </div>
     
   <div class="AreaDeTexto" id="areadetexto">
   
-  <textarea name="preguntas" cols="100" rows="10" class="Pregunta" id="pregunta">Colocar aquí el contenido para  class "AreaDeTexto" id "areadetexto"</textarea>
+  <div name="preguntas" class="Pregunta" id="pregunta" contenteditable="true"></div>
   
   </div> 
    
 </div>
 
 
-<div class="EditorDeEcuaciones" id="editordeecuaciones" style="visibility: hidden; margin-top:10px">
+<div class="EditorDeEcuaciones" id="editordeecuaciones">
   
-  <div class="Panel" id="panel" style="position: relative">
-  <input name="operadores" type="button" class="Operadores grupo1" id="operadores" value="Operadores" />
-  <input name="flechas" type="button" class="Flechas grupo1" id="flechas" value="Flechas" />
-  <input name="simbolosgriegos" type="button" class="SimbolosGriegos grupo1" id="simbolosgriegos" value="Sim Griegos" />
-  <input name="avanzado" type="button" class="Avanzado grupo1" id="avanzado" value="Avanzado" />
-  <input name="cerrar" type="button" class="Cerrar grupo1" id="cerrar" value="X" style="float:right"/>
+  <div class="BarraDeTitulo" id="editordeecuacionesheader">
+  <input name="cerrar" type="button" class="Cerrar" id="cerrar" value="X"/>
   </div>
   
-  <div class="ListaDeBotones" id="listadebotones" style="position:relative; height:100px">
+  <div class="" id="">
+  <input name="operadores" type="button" class="" id="operadores" value="Operadores" />
+  <input name="logicayconjuntos" type="button" class="" id="logicayconjuntos" value="Conjuntos y Lógica" />
+  <input name="simbolosgriegos" type="button" class="" id="simbolosgriegos" value="Sim Griegos" />
+  <input name="avanzado" type="button" class="" id="avanzado" value="Avanzado" />
+  </div>
   
-   <div class="Operadores" id="operadores" style="visibility:hidden; position: absolute; height:90px">
-   <button class="Mas" id="mas" value="+">+</button>
-    </div>
+  <div class="contenedor" id="contenedor">
+  
+   <div class="" id="grupo1">
+   <button class="" id="" value="+">\(+\)</button>
+   <button class="" id="" value="-">\(-\)</button>
+   <button class="" id="" value="\pm">\(\pm\)</button>
+   <button class="" id="" value="\mp">\(\mp\)</button>
+   <button class="" id="" value="\div">\(\div\)</button>
+   <button class="" id="" value="\times">\(\times\)</button>
+   <button class="" id="" value="\ast">\(\ast\)</button>
+   <button class="" id="" value="\cdot">\(\cdot\)</button>
+   <button class="" id="" value="\bullet">\(\bullet\)</button>
+   <button class="" id="" value="\centerdot">\(\centerdot\)</button>
+   <button class="" id="" value="\circ">\(\circ\)</button>
+   <button class="" id="" value="\bigcirc">\(\bigcirc\)</button>
+   <button class="" id="" value="\bigtriangledown">\(\bigtriangledown\)</button>
+   <button class="" id="" value="\bigtriangleup">\(\bigtriangleup\)</button><br />
+   <button class="" id="" value="\diamond">\(\diamond\)</button>
+   <button class="" id="" value="\boxdot">\(\boxdot\)</button>
+   <button class="" id="" value="\boxminus">\(\boxminus\)</button>
+   <button class="" id="" value="\boxplus">\(\boxplus\)</button>
+   <button class="" id="" value="\boxtimes">\(\boxtimes\)</button>
+   <button class="" id="" value="\Box">\(\Box\)</button>
+   <button class="" id="" value="\circledast">\(\circledast\)</button>
+   <button class="" id="" value="\circledcirc">\(\circledcirc\)</button>
+   <button class="" id="" value="\circleddash">\(\circleddash\)</button>
+   <button class="" id="" value="\odot">\(\odot\)</button>
+   <button class="" id="" value="\ominus">\(\ominus\)</button>
+   <button class="" id="" value="\oplus">\(\oplus\)</button><br />
+   <button class="" id="" value="\oslash">\(\oslash\)</button>
+   <button class="" id="" value="\otimes">\(\otimes\)</button>
+   <button class="" id="" value="\cap">\(\cap\)</button>
+   <button class="" id="" value="\Cap">\(\Cap\)</button>
+   <button class="" id="" value="\cup">\(\cup\)</button>
+   <button class="" id="" value="\Cup">\(\Cup\)</button>
+   <button class="" id="" value="\uplus">\(\uplus\)</button>
+   <button class="" id="" value="\sqcap">\(\sqcap\)</button>
+   <button class="" id="" value="\sqcup">\(\sqcup\)</button>
+   <button class="" id="" value="\dagger">\(\dagger\)</button>
+   <button class="" id="" value="\ddagger">\(\ddagger\)</button>
+   <button class="" id="" value="\divideontimes">\(\divideontimes\)</button><br />
+   <button class="" id="" value="\dotplus">\(\dotplus\)</button>
+   <button class="" id="" value="\vee">\(\vee\)</button>
+   <button class="" id="" value="\wedge">\(\wedge\)</button>
+   <button class="" id="" value="\veebar">\(\veebar\)</button>
+   <button class="" id="" value="\barwedge">\(\barwedge\)</button>
+   <button class="" id="" value="\doublebarwedge">\(\doublebarwedge\)</button>
+   <button class="" id="" value="\approx">\(\approx\)</button>
+   <button class="" id="" value="\approxeq">\(\approxeq\)</button>
+   <button class="" id="" value="\geq">\(\geq\)</button>
+   <button class="" id="" value="\geqslant">\(\geqslant\)</button>
+   <button class="" id="" value="\leq">\(\leq\)</button>
+   <button class="" id="" value="\leqslant">\(\leqslant\)</button>
+   <button class="" id="" value="\neq">\(\neq\)</button>
+   <button class="" id="" value="\ll">\(\ll\)</button>
+   <button class="" id="" value="\gg">\(\gg\)</button>
+   <button class="" id="" value="\equiv">\(\equiv\)</button></div>
 
-   <div class="Flechas" id="flechas" style="visibility:hidden; position: absolute">
-   <button class="Adelante" id="adelante" value="-->">-></button>
-   </div>
+   <div class="" id="grupo2">
+   <button class="" id="" value="\emptyset">\(\emptyset\)</button>
+   <button class="" id="" value="\varnothing">\(\varnothing\)</button>
+   <button class="" id="" value="\in">\(\in\)</button>
+   <button class="" id="" value="\notin">\(\notin\)</button>
+   <button class="" id="" value="\ni">\(\ni\)</button>
+   <button class="" id="" value="\subset">\(\subset\)</button>
+   <button class="" id="" value="\subseteq">\(\subseteq\)</button>
+   <button class="" id="" value="\supset">\(\supset\)</button>
+   <button class="" id="" value="\supseteq">\(\supseteq\)</button>
+   <button class="" id="" value="\not\subset">\(\not\subset\)</button>
+   <button class="" id="" value="\nsubseteq">\(\nsubseteq\)</button>
+   <button class="" id="" value="\nsubseteqq">\(\nsubseteqq\)</button><br />
+   <button class="" id="" value="\subsetneq">\(\subsetneq\)</button>
+   <button class="" id="" value="\varsubsetneq">\(\varsubsetneq\)</button>
+   <button class="" id="" value="\subsetneqq">\(\subsetneqq\)</button>
+   <button class="" id="" value="\varsubsetneqq">\(\varsubsetneqq\)</button>
+   <button class="" id="" value="\not\supset">\(\not\supset\)</button>
+   <button class="" id="" value="\nsupseteq">\(\nsupseteq\)</button>
+   <button class="" id="" value="\nsupseteqq">\(\nsupseteqq\)</button>
+   <button class="" id="" value="\supsetneq">\(\supsetneq\)</button>
+   <button class="" id="" value="\varsupsetneq">\(\varsupsetneq\)</button>
+   <button class="" id="" value="\supsetneqq">\(\supsetneqq\)</button>
+   <button class="" id="" value="\varsupsetneqq">\(\varsupsetneqq\)</button>
+   <button class="" id="" value="\sqsubset">\(\sqsubset\)</button><br />
+   <button class="" id="" value="\sqsubseteq">\(\sqsubseteq\)</button>
+   <button class="" id="" value="\sqsupset">\(\sqsupset\)</button>
+   <button class="" id="" value="\sqsupseteq">\(\sqsupseteq\)</button>
+   <button class="" id="" value="\Subset">\(\Subset\)</button>
+   <button class="" id="" value="\Supset">\(\Supset\)</button>
+   <button class="" id="" value="\cup">\(\cup\)</button>
+   <button class="" id="" value="\cap">\(\cap\)</button>
+   <button class="" id="" value="\setminus">\(\setminus\)</button>
+   <button class="" id="" value="\exists">\(\exists\)</button>
+   <button class="" id="" value="\exists!">\(\exists!\)</button>
+   <button class="" id="" value="\nexists">\(\nexists\)</button>
+   <button class="" id="" value="\forall">\(\forall\)</button><br />
+   <button class="" id="" value="\neg">\(\neg\)</button>
+   <button class="" id="" value="\lor">\(\lor\)</button>
+   <button class="" id="" value="\land">\(\land\)</button>
+   <button class="" id="" value="\Longrightarrow">\(\Longrightarrow\)</button>
+   <button class="" id="" value="\rightarrow">\(\rightarrow\)</button>
+   <button class="" id="" value="\Longleftarrow">\(\Longleftarrow\)</button>
+   <button class="" id="" value="\Leftarrow">\(\leftarrow\)</button>
+   <button class="" id="" value="\iff">\(\iff\)</button>
+   <button class="" id="" value="\Leftrightarrow">\(\Leftrightarrow\)</button>
+   <button class="" id="" value="\top">\(\top\)</button>
+   <button class="" id="" value="\bot">\(\bot\)</button></div>
 
-   <div class="SimbolosGriegos" id="simbolosgriegos" style="visibility:hidden; position: absolute; height:90px">
-   <button class="Alpha" id="alpha" value="Α">Αfgf</button>
-   <button class="Alpha" id="alpha" value="Β">Β</button>
-   <button class="Alpha" id="alpha" value="Γ">Γ</button>
-   <button class="Alpha" id="alpha" value="Δ">Δ</button>
-   <button class="Alpha" id="alpha" value="Ε">Ε</button>
-   <button class="Alpha" id="alpha" value="Ζ">Ζ</button>
-   <button class="Alpha" id="alpha" value="Η">Η</button>
-   <button class="Alpha" id="alpha" value="Θ">Θ</button>
-   <button class="Alpha" id="alpha" value="Ι">Ι</button>
-   <button class="Alpha" id="alpha" value="Κ">Κ</button>
-   <button class="Alpha" id="alpha" value="Λ">Λ</button>
-   <button class="Alpha" id="alpha" value="Μ">Μ</button><br />
-   <button class="Alpha" id="alpha" value="Ν">Ν</button>
-   <button class="Alpha" id="alpha" value="Ξ">Ξ</button>
-   <button class="Alpha" id="alpha" value="Ο">Ο</button>
-   <button class="Alpha" id="alpha" value="Π">Π</button>
-   <button class="Alpha" id="alpha" value="Ρ">Ρ</button>
-   <button class="Alpha" id="alpha" value="Σ">Σ</button>
-   <button class="Alpha" id="alpha" value="Τ">Τ</button>
-   <button class="Alpha" id="alpha" value="Υ">Υ</button>
-   <button class="Alpha" id="alpha" value="Φ">Φ</button>
-   <button class="Alpha" id="alpha" value="Χ">Χ</button>
-   <button class="Alpha" id="alpha" value="Ψ">Ψ</button>
-   <button class="Alpha" id="alpha" value="Ω">Ω</button><br />
-   <button class="Alpha" id="alpha" value="\(\alpha\)">\(\alpha\)</button>
-   <button class="Alpha" id="alpha" value="\beta">\(\beta\)</button>
-   <button class="Alpha" id="alpha" value="\gamma">\(\gamma\)</button>
-   <button class="Alpha" id="alpha" value="\delta">\(\delta\)</button>
-   <button class="Alpha" id="alpha" value="\epsilon">\(\epsilon\)</button>
-   <button class="Alpha" id="alpha" value="\zeta">\(\zeta\)</button>
-   <button class="Alpha" id="alpha" value="\eta">\(\eta\)</button>
-   <button class="Alpha" id="alpha" value="\theta">\(\theta\)</button>
-   <button class="Alpha" id="alpha" value="\iota">\(\iota\)</button>
-   <button class="Alpha" id="alpha" value="\kappa">\(\kappa\)</button>
-   <button class="Alpha" id="alpha" value="\lambda">\(\lambda\)</button>
-   <button class="Alpha" id="alpha" value="\mu">\(\mu\)</button><br />
-   <button class="Alpha" id="alpha" value="\nu">\(\nu\)</button>
-   <button class="Alpha" id="alpha" value="\xi">\(\xi\)</button>
-   <button class="Alpha" id="alpha" value="\omicron">\(\omicron\)</button>
-   <button class="Alpha" id="alpha" value="\pi">\(\pi\)</button>
-   <button class="Alpha" id="alpha" value="\rho">\(\rho\)</button>
-   <button class="Alpha" id="alpha" value="\sigma">\(\sigma\)</button>
-   <button class="Alpha" id="alpha" value="\tau">\(\tau\)</button>
-   <button class="Alpha" id="alpha" value="\upsilon">\(\upsilon\)</button>
-   <button class="Alpha" id="alpha" value="\phi">\(\phi\)</button>
-   <button class="Alpha" id="alpha" value="\chi">\(\chi\)</button>
-   <button class="Alpha" id="alpha" value="\psi">\(\psi\)</button>
-   <button class="Alpha" id="alpha" value="\omega">\(\omega\)</button></div>
+   <div class="" id="grupo3">
+   <button class="" id="" value="Α">Α</button>
+   <button class="" id="" value="Β">Β</button>
+   <button class="" id="" value="Γ">Γ</button>
+   <button class="" id="" value="Δ">Δ</button>
+   <button class="" id="" value="Ε">Ε</button>
+   <button class="" id="" value="Ζ">Ζ</button>
+   <button class="" id="" value="Η">Η</button>
+   <button class="" id="" value="Θ">Θ</button>
+   <button class="" id="" value="Ι">Ι</button>
+   <button class="" id="" value="Κ">Κ</button>
+   <button class="" id="" value="Λ">Λ</button>
+   <button class="" id="" value="Μ">Μ</button><br />
+   <button class="" id="" value="Ν">Ν</button>
+   <button class="" id="" value="Ξ">Ξ</button>
+   <button class="" id="" value="Ο">Ο</button>
+   <button class="" id="" value="Π">Π</button>
+   <button class="" id="" value="Ρ">Ρ</button>
+   <button class="" id="" value="Σ">Σ</button>
+   <button class="" id="" value="Τ">Τ</button>
+   <button class="" id="" value="Υ">Υ</button>
+   <button class="" id="" value="Φ">Φ</button>
+   <button class="" id="" value="Χ">Χ</button>
+   <button class="" id="" value="Ψ">Ψ</button>
+   <button class="" id="" value="Ω">Ω</button><br />
+   <button class="" id="" value="\alpha">\(\alpha\)</button>
+   <button class="" id="" value="\beta">\(\beta\)</button>
+   <button class="" id="" value="\gamma">\(\gamma\)</button>
+   <button class="" id="" value="\delta">\(\delta\)</button>
+   <button class="" id="" value="\epsilon">\(\epsilon\)</button>
+   <button class="" id="" value="\zeta">\(\zeta\)</button>
+   <button class="" id="" value="\eta">\(\eta\)</button>
+   <button class="" id="" value="\theta">\(\theta\)</button>
+   <button class="" id="" value="\iota">\(\iota\)</button>
+   <button class="" id="" value="\kappa">\(\kappa\)</button>
+   <button class="" id="" value="\lambda">\(\lambda\)</button>
+   <button class="" id="" value="\mu">\(\mu\)</button><br />
+   <button class="" id="" value="\nu">\(\nu\)</button>
+   <button class="" id="" value="\xi">\(\xi\)</button>
+   <button class="" id="" value="\omicron">\(\omicron\)</button>
+   <button class="" id="" value="\pi">\(\pi\)</button>
+   <button class="" id="" value="\rho">\(\rho\)</button>
+   <button class="" id="" value="\sigma">\(\sigma\)</button>
+   <button class="" id="" value="\tau">\(\tau\)</button>
+   <button class="" id="" value="\upsilon">\(\upsilon\)</button>
+   <button class="" id="" value="\phi">\(\phi\)</button>
+   <button class="" id="" value="\chi">\(\chi\)</button>
+   <button class="" id="" value="\psi">\(\psi\)</button>
+   <button class="" id="" value="\omega">\(\omega\)</button></div>
 
-   <div class="Avanzado" id="avanzado" style="visibility: hidden; position: absolute">
-   <button class="Potencia" id="potencia" value="x^y">x^y</button>
-   </div>
+   <div class="" id="grupo4">
+   <button class="" id="" value="\acute{a}">\(\acute{a}\)</button>
+   <button class="" id="" value="\grave{a}">\(\grave{a}\)</button>
+   <button class="" id="" value="\tilde{a}">\(\tilde{a}\)</button>
+   <button class="" id="" value="\bar{a}">\(\bar{a}\)</button>
+   <button class="" id="" value="\hat{a}">\(\hat{a}\)</button>
+   <button class="" id="" value="\vec{a}">\(\vec{a}\)</button>
+   <button class="" id="" value="\dot{a}">\(\dot{a}\)</button>
+   <button class="" id="" value="\ddot{a}">\(\ddot{a}\)</button>
+   <button class="" id="" value="\dddot{a}">\(\dddot{a}\)</button>
+   <button class="" id="" value="\frac{a}{b}">\(\frac{a}{b}\)</button>
+   <button class="" id="" value="\sqrt{a}">\(\sqrt{a}\)</button>
+   <button class="" id="" value="\sqrt{n}{a}">\(\sqrt{n}{a}\)</button><br />
+   <button class="" id="" value="k_n">\(k_n\)</button>
+   <button class="" id="" value="a^{n}">\(a^{n}\)</button>
+   <button class="" id="" value="|a|">\(|a|\)</button>
+   <button class="" id="" value="\|a\|">\(\|a\|\)</button>
+   <button class="" id="" value="\langle a \rangle">\(\langle a \rangle\)</button>
+   <button class="" id="" value="\log{a}{b}">\(\log{a}{b}\)</button>
+   <button class="" id="" value="\ln{a}{b}">\(\ln{a}{b}\)</button>
+   <button class="" id="" value="\sum_{i=1}^{n}a">\(\sum_{i=1}^{n}a\)</button>
+   <button class="" id="" value="\prod_{i=1}^{n}a">\(\prod_{i=1}^{n}a\)</button>
+   <button class="" id="" value="\int_{a}^{b} x \mathrm{d}x">\(\int_{a}^{b} x \mathrm{d}x\)</button>
+   <button class="" id="" value="\iint_{a}^{b} x \mathrm{d}x">\(\iint_{a}^{b} x \mathrm{d}x\)</button>
+   <button class="" id="" value="\iiint_{a}^{b} x \mathrm{d}x">\(\iiint_{a}^{b} x \mathrm{d}x\)</button><br />
+   <button class="" id="" value="\oint">\(\oint\)</button>
+   <button class="" id="" value="\lim_{x\rightarrow\infty} f(x)">\(\lim_{x\rightarrow\infty} f(x)\)</button>
+   <button class="" id="" value="\begin{matrix} a & b \\ c & d \end{matrix}">\(\begin{matrix} a & b \\ c & d \end{matrix}\)</button>
+   <button class="" id="" value="\begin{pmatrix} a & b \\ c & d \end{pmatrix}">\(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)</button>
+   <button class="" id="" value="\\begin{bmatrix} a & b \\ c & d \end{bmatrix}">\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)</button>
+   <button class="" id="" value="\begin{Bmatrix} a & b \\ c & d \end{Bmatrix}">\(\begin{vmatrix} a & b \\ c & d \end{vmatrix}\)</button>
+   <button class="" id="" value="\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}">\(\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}\)</button></div>
   
   </div>
   
-<div class="AreaDeEdicion" id="areadeedicion" style="margin-top:10px">
-  <textarea name="VistaPrevia" cols="100" rows="10" class="VistaPrevia" id="vistaprevia">Colocar aquí el contenido para  class "AreaDeEdicion" id "areadeedicion"</textarea>
+<div class="" id="">
+  <div name="VistaPrevia" class="VistaPrevia" id="vistaprevia" contenteditable="true"></div>
+  <div name="VistaPrevia" class="VistaPrevia2" id="vistaprevia2"></div>
   <div class="" id="">
   <input name="close" type="button" class="close" id="close" value="close" />
   <input name="ok" type="button" class="ok" id="ok" value="ok" />
@@ -206,5 +385,52 @@ div{
 </div>
   
 </div>
+<script>
+dragElement(document.getElementById("editordeecuaciones"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    //elmnt.style.top = (elmnt.offsetTop - pos4) + "px";
+    //elmnt.style.left = (elmnt.offsetLeft - pos3) + "px";
+	elmnt.style.top = (pos4-250) + "px";
+    elmnt.style.left = (pos3-100) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
 </body>
 </html>
+

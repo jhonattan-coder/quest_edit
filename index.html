@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -56,13 +56,15 @@ function edit(e){
   var text=document.getElementById("vistaprevia").textContent;
   text += e.target.closest("button").value;
   document.activeElement.blur()
-	area.textContent= text;
+  area.textContent= text;
+  $("#preview").text("\\("+text+"\\)");
+  MathJax.startup.defaultPageReady();
 	}
 	
 function ok(){
 	var text=document.getElementById("vistaprevia").textContent;
 	var main_text=document.getElementById("pregunta");
-	main_text.textContent += text;
+  main_text.textContent += text;
 	}
 
 window.onclick = function(event) {
@@ -161,9 +163,9 @@ div{
     
   </div>
     
-  <div class="AreaDeTexto" id="areadetexto">
+  <div class="AreaDeTexto tex2jax_ignore" id="areadetexto">
   
-  <div name="preguntas" class="Pregunta" id="pregunta" contenteditable="true"></div>
+  <div name="preguntas" class="Pregunta tex2jax_ignore" id="pregunta" contenteditable="true"></div>
   
   </div> 
    
@@ -377,7 +379,9 @@ div{
   
 <div class="" id="">
   <div name="VistaPrevia" class="VistaPrevia" id="vistaprevia" contenteditable="true"></div>
-  <div name="VistaPrevia" class="VistaPrevia2" id="vistaprevia2"></div>
+  <div name="VistaPrevia" class="VistaPrevia2" id="vistaprevia2">
+    <p id="preview"></p>
+  </div>
   <div class="" id="">
   <input name="close" type="button" class="close" id="close" value="close" />
   <input name="ok" type="button" class="ok" id="ok" value="ok" />

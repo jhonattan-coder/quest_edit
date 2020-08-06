@@ -9,89 +9,8 @@
 <script> MathJax = {startup: {pageReady() {MathJax.startup.defaultPageReady()}}}</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-
-function mostrarPaleta(){
-  var x = document.getElementById("editordeecuaciones");
-  x.style.display = "block";
-  hacerclic();
-}
-
-function ocultarPaleta(){	      
-  var area=document.getElementById("vistaprevia");
-  area.textContent="";
-  var x = document.getElementById("editordeecuaciones");
-  x.style.display = "none";
-}
-
-function cambiarPaleta(e){
-	var grupo1 = document.getElementById("grupo1");
-	grupo1.style.visibility = "hidden";
-	var grupo2 = document.getElementById("grupo2");
-	grupo2.style.visibility = "hidden";
-	var grupo3 = document.getElementById("grupo3");
-	grupo3.style.visibility = "hidden";
-	var grupo4 = document.getElementById("grupo4");
-	grupo4.style.visibility = "hidden";
-	
-	if(e.target.id==="operadores"){
-		grupo1.style.visibility = "visible";
-	//var btn = document.createElement("button");
-	//grupo1.appendChild(btn);
-	}
-	if(e.target.id==="logicayconjuntos"){
-		grupo2.style.visibility = "visible";
-	}
-	if(e.target.id==="simbolosgriegos"){
-		grupo3.style.visibility = "visible";
-	}
-	if(e.target.id==="avanzado"){
-	grupo4.style.visibility = "visible";
-	}
-	
-}
-function edit(e){
-	var area=document.getElementById("vistaprevia");
-  var text=document.getElementById("vistaprevia").textContent;
-  text += e.target.closest("button").value;
-  document.activeElement.blur()
-  area.textContent= text;
-  $("#preview").text("\\("+text+"\\)");
-  MathJax.startup.defaultPageReady();
-	}
-	
-function ok(){
-	var text=document.getElementById("vistaprevia").textContent;
-	var main_text=document.getElementById("pregunta");
-  main_text.textContent += text;
-	}
-
-window.onclick = function(event) {
-  if (event.target.id == "SimbolosMatematicas") {
-	mostrarPaleta();
-  }
-  else if (event.target.id == "cerrar" || event.target.id == "close"){
-	ocultarPaleta();
-	  }
-	else if(event.target.id == "operadores" || event.target.id == "logicayconjuntos" || event.target.id == "simbolosgriegos" || event.target.id == "avanzado"){
-     cambiarPaleta(event); 
-		}
-		else if (event.target.id == "ok"){
-	     ok();
-	  }
-}
-
-function hacerclic(){
-for(i=0;i<184;i++){
-document.querySelectorAll('button')[i].onclick=edit;
-}
-}
-
-//window.onload = hacerclic;
-
-</script>
-
+<script src="editorDePreguntas.js"></script>
+<script src="funcionArrastrarVentana.js"></script>
 <style>
 
 div{
@@ -99,15 +18,12 @@ div{
 	padding:5px;
 	margin-top:2px;
 	}
-#enunciadopregunta, #editordeecuaciones{
+#enunciadopregunta{
 	width:50%;
 	}
-#pregunta{
-	width:50%; 
-	height:100px; 
-	border: solid 1px #000000;
-	}
+	
 #editordeecuaciones{
+	width:50%;
 	position: relative; 
 	display:none; 
 	margin-top:10px;
@@ -124,29 +40,41 @@ div{
 	}
 #contenedor{
 	position:relative; 
-	height:100px;
+	height:160px;
+	width:98.1%;
 	}
-#grupo1, #grupo2, #grupo4{
+#grupo2, #grupo3, #grupo4{
 	 visibility: hidden; 
 	 position:absolute; 
-	 height:90px;
+	 height:150px;
+	 width:97%;
 	}
-#grupo3{
+#grupo1{
 	visibility: visible; 
 	 position:absolute; 
-	 height:90px;
+	 height:150px;
+	 width:97%;
 	}
 	
-#vistaprevia{
-	width:50%; 
-	height:100px; 
-	border: solid 1px #000000;
-}
 #vistaprevia2{
 	width:50%; 
-	height:30px; 
+	height:50px; 
 	border: solid 1px #000000;
 }
+button {
+	font-size:12px;
+	width: 35px;
+	height: 35px;
+	padding:0;
+	margin:0.5px;
+	}
+.btnLarge{
+	font-size:12px;
+	width: auto;
+	height: auto;
+	padding:5px;
+	margin:0.5px;
+	}
 </style>
 
 </head>
@@ -165,7 +93,8 @@ div{
     
   <div class="AreaDeTexto tex2jax_ignore" id="areadetexto">
   
-  <div name="preguntas" class="Pregunta tex2jax_ignore" id="pregunta" contenteditable="true"></div>
+  <!-- <div name="preguntas" class="Pregunta tex2jax_ignore" id="pregunta" contenteditable="true"></div>-->
+  <textarea name="preguntas" cols="90" rows="10" class="Pregunta" id="pregunta"></textarea>
   
   </div> 
    
@@ -362,24 +291,25 @@ div{
    <button class="" id="" value="\langle a \rangle">\(\langle a \rangle\)</button>
    <button class="" id="" value="\log{a}{b}">\(\log{a}{b}\)</button>
    <button class="" id="" value="\ln{a}{b}">\(\ln{a}{b}\)</button>
-   <button class="" id="" value="\sum_{i=1}^{n}a">\(\sum_{i=1}^{n}a\)</button>
-   <button class="" id="" value="\prod_{i=1}^{n}a">\(\prod_{i=1}^{n}a\)</button>
-   <button class="" id="" value="\int_{a}^{b} x \mathrm{d}x">\(\int_{a}^{b} x \mathrm{d}x\)</button>
-   <button class="" id="" value="\iint_{a}^{b} x \mathrm{d}x">\(\iint_{a}^{b} x \mathrm{d}x\)</button>
-   <button class="" id="" value="\iiint_{a}^{b} x \mathrm{d}x">\(\iiint_{a}^{b} x \mathrm{d}x\)</button><br />
-   <button class="" id="" value="\oint">\(\oint\)</button>
-   <button class="" id="" value="\lim_{x\rightarrow\infty} f(x)">\(\lim_{x\rightarrow\infty} f(x)\)</button>
-   <button class="" id="" value="\begin{matrix} a & b \\ c & d \end{matrix}">\(\begin{matrix} a & b \\ c & d \end{matrix}\)</button>
-   <button class="" id="" value="\begin{pmatrix} a & b \\ c & d \end{pmatrix}">\(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)</button>
-   <button class="" id="" value="\\begin{bmatrix} a & b \\ c & d \end{bmatrix}">\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)</button>
-   <button class="" id="" value="\begin{Bmatrix} a & b \\ c & d \end{Bmatrix}">\(\begin{vmatrix} a & b \\ c & d \end{vmatrix}\)</button>
-   <button class="" id="" value="\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}">\(\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}\)</button></div>
+   <button class="btnLarge" id="" value="\sum_{i=1}^{n}a">\(\sum_{i=1}^{n}a\)</button>
+   <button class="btnLarge" id="" value="\prod_{i=1}^{n}a">\(\prod_{i=1}^{n}a\)</button>
+   <button class="btnLarge" id="" value="\int_{a}^{b} x \mathrm{d}x">\(\int_{a}^{b} x \mathrm{d}x\)</button>
+   <button class="btnLarge" id="" value="\iint_{a}^{b} x \mathrm{d}x">\(\iint_{a}^{b} x \mathrm{d}x\)</button>
+   <button class="btnLarge" id="" value="\iiint_{a}^{b} x \mathrm{d}x">\(\iiint_{a}^{b} x \mathrm{d}x\)</button><br />
+   <button class="btnLarge" id="" value="\oint f(s) \mathrm{d}s">\(\oint f(s) \mathrm{d}s\)</button>
+   <button class="btnLarge" id="" value="\lim_{x\rightarrow\infty} f(x)">\(\lim_{x\rightarrow\infty} f(x)\)</button>
+   <button class="btnLarge" id="" value="\begin{matrix} a & b \\ c & d \end{matrix}">\(\begin{matrix} a & b \\ c & d \end{matrix}\)</button>
+   <button class="btnLarge" id="" value="\begin{pmatrix} a & b \\ c & d \end{pmatrix}">\(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)</button>
+   <button class="btnLarge" id="" value="\\begin{bmatrix} a & b \\ c & d \end{bmatrix}">\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)</button>
+   <button class="btnLarge" id="" value="\begin{Bmatrix} a & b \\ c & d \end{Bmatrix}">\(\begin{vmatrix} a & b \\ c & d \end{vmatrix}\)</button>
+   <button class="btnLarge" id="" value="\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}">\(\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}\)</button></div>
   
   </div>
   
 <div class="" id="">
-  <div name="VistaPrevia" class="VistaPrevia" id="vistaprevia" contenteditable="true"></div>
-  <div name="VistaPrevia" class="VistaPrevia2" id="vistaprevia2">
+  <!-- <div name="VistaPrevia" class="VistaPrevia" id="vistaprevia" contenteditable="true"></div> -->
+  <textarea name="VistaPrevia" cols="90" rows="5" class="VistaPrevia" id="vistaprevia"></textarea>
+  <div name="VistaPrevia2" class="VistaPrevia2" id="vistaprevia2">
     <p id="preview"></p>
   </div>
   <div class="" id="">
@@ -387,10 +317,8 @@ div{
   <input name="ok" type="button" class="ok" id="ok" value="ok" />
   </div>
 </div>
-  
-</div>
-<script>
-dragElement(document.getElementById("editordeecuaciones"));
+  <script> 
+  dragElement(document.getElementById("editordeecuaciones"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -434,7 +362,8 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-</script>
+  </script>
+</div>
 </body>
 </html>
 

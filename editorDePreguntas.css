@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+div{
+	border:solid 1px rgb(102,102,102,1);
+	padding:5px;
+	margin-top:2px;
+	}
+#enunciadopregunta{
+	width:50%;
+	}
+	
+#editordeecuaciones{
+	width:50%;
+	position: relative; 
+	display:none; 
+	margin-top:10px;
+	z-index:9;
+	background-color: rgb(204,204,204);
+	}
+#editordeecuacionesheader{
+	position: relative;
+	background-color: rgb(3, 115, 235);
+	height: 20px; 
+	cursor: move;
+	z-index:10;
+}
+#cerrar{
+	float:right;
+	}
+#contenedor{
+	position:relative; 
+	height:160px;
+	width:98.1%;
+	}
+#grupo2, #grupo3, #grupo4{
+	 visibility: hidden; 
+	 position:absolute; 
+	 height:150px;
+	 width:97%;
+	}
+#grupo1{
+	visibility: visible; 
+	 position:absolute; 
+	 height:150px;
+	 width:97%;
+	}
+	
+#vistaprevia2{
+	width:50%; 
+	height:50px; 
+	border: solid 1px #000000;
+}
+button {
+	font-size:12px;
+	width: 35px;
+	height: 35px;
+	padding:0;
+	margin:0.5px;
+	}
+.btnLarge{
+	font-size:12px;
+	width: auto;
+	height: auto;
+	padding:5px;
+	margin:0.5px;
+	}
+

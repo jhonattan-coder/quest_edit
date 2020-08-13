@@ -11,72 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="editorDePreguntas.js"></script>
 <script src="funcionArrastrarVentana.js"></script>
-<style>
-
-div{
-	border:solid 1px rgb(102,102,102);
-	padding:5px;
-	margin-top:2px;
-	}
-#enunciadopregunta{
-	width:50%;
-	}
-	
-#editordeecuaciones{
-	width:50%;
-	position: relative; 
-	display:none; 
-	margin-top:10px;
-	z-index:9;
-	}
-#editordeecuacionesheader{
-	position: relative; 
-	height: 20px; 
-	cursor: move;
-	z-index:10;
-}
-#cerrar{
-	float:right;
-	}
-#contenedor{
-	position:relative; 
-	height:160px;
-	width:98.1%;
-	}
-#grupo2, #grupo3, #grupo4{
-	 visibility: hidden; 
-	 position:absolute; 
-	 height:150px;
-	 width:97%;
-	}
-#grupo1{
-	visibility: visible; 
-	 position:absolute; 
-	 height:150px;
-	 width:97%;
-	}
-	
-#vistaprevia2{
-	width:50%; 
-	height:50px; 
-	border: solid 1px #000000;
-}
-button {
-	font-size:12px;
-	width: 35px;
-	height: 35px;
-	padding:0;
-	margin:0.5px;
-	}
-.btnLarge{
-	font-size:12px;
-	width: auto;
-	height: auto;
-	padding:5px;
-	margin:0.5px;
-	}
-</style>
-
+<link href="editorDePreguntas.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -283,7 +218,7 @@ button {
    <button class="" id="" value="\dddot{a}">\(\dddot{a}\)</button>
    <button class="" id="" value="\frac{a}{b}">\(\frac{a}{b}\)</button>
    <button class="" id="" value="\sqrt{a}">\(\sqrt{a}\)</button>
-   <button class="" id="" value="\sqrt{n}{a}">\(\sqrt{n}{a}\)</button><br />
+   <button class="" id="" value="\sqrt[n]{a}">\(\sqrt[n]{a}\)</button><br />
    <button class="" id="" value="k_n">\(k_n\)</button>
    <button class="" id="" value="a^{n}">\(a^{n}\)</button>
    <button class="" id="" value="|a|">\(|a|\)</button>
@@ -300,7 +235,7 @@ button {
    <button class="btnLarge" id="" value="\lim_{x\rightarrow\infty} f(x)">\(\lim_{x\rightarrow\infty} f(x)\)</button>
    <button class="btnLarge" id="" value="\begin{matrix} a & b \\ c & d \end{matrix}">\(\begin{matrix} a & b \\ c & d \end{matrix}\)</button>
    <button class="btnLarge" id="" value="\begin{pmatrix} a & b \\ c & d \end{pmatrix}">\(\begin{pmatrix} a & b \\ c & d \end{pmatrix}\)</button>
-   <button class="btnLarge" id="" value="\\begin{bmatrix} a & b \\ c & d \end{bmatrix}">\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)</button>
+   <button class="btnLarge" id="" value="\begin{bmatrix} a & b \\ c & d \end{bmatrix}">\(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\)</button>
    <button class="btnLarge" id="" value="\begin{Bmatrix} a & b \\ c & d \end{Bmatrix}">\(\begin{vmatrix} a & b \\ c & d \end{vmatrix}\)</button>
    <button class="btnLarge" id="" value="\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}">\(\begin{Vmatrix} a & b \\ c & d \end{Vmatrix}\)</button></div>
   
@@ -308,7 +243,7 @@ button {
   
 <div class="" id="">
   <!-- <div name="VistaPrevia" class="VistaPrevia" id="vistaprevia" contenteditable="true"></div> -->
-  <textarea name="VistaPrevia" cols="90" rows="5" class="VistaPrevia" id="vistaprevia"></textarea>
+  <textarea name="VistaPrevia" cols="90" rows="5" class="VistaPrevia" id="vistaprevia" onchange="vistaprevia()"></textarea>
   <div name="VistaPrevia2" class="VistaPrevia2" id="vistaprevia2">
     <p id="preview"></p>
   </div>
@@ -317,53 +252,10 @@ button {
   <input name="ok" type="button" class="ok" id="ok" value="ok" />
   </div>
 </div>
-  <script> 
-  dragElement(document.getElementById("editordeecuaciones"));
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    //elmnt.style.top = (elmnt.offsetTop - pos4) + "px";
-    //elmnt.style.left = (elmnt.offsetLeft - pos3) + "px";
-	elmnt.style.top = (pos4-250) + "px";
-    elmnt.style.left = (pos3-100) + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
-  </script>
 </div>
+
 </body>
+
 </html>
 

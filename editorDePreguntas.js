@@ -109,4 +109,11 @@ window.onclick = function(event) {
 	     ok();
 	  }
 }
+// funcion que se dispara con el evento onchange desde el area de texto 2
+function vistaprevia(){
+	var text=document.getElementById("vistaprevia").value;
+  	$("#preview").text("\\("+text+"\\)");
+  	MathJax.startup.defaultPageReady();
+	}
+
 
